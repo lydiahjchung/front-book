@@ -32,15 +32,14 @@ jobs:
       - name: Build Storybook
         run: pnpm run build-storybook
 
-      - name: Upload Storybook build
-        uses: actions/upload-artifact@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: storybook-build
           path: storybook-static
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [test, build]
 
     permissions:
       pages: write
@@ -51,22 +50,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: storybook-build
-          path: ./storybook-static
-
-      - name: List contents of the artifact
-        run: |
-          echo "Contents of ./storybook-static:"
-          ls -lR ./storybook-static
-          echo "Total size:"
-          du -sh ./storybook-static
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

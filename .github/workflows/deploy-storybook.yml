@@ -61,15 +61,8 @@ jobs:
           name: github-pages
           path: ./storybook-static
 
-      - name: Check artifact contents
-        run: |
-          echo "Artifact contents:"
-          ls -lR ./storybook-static
-          echo "Total size:"
-          du -sh ./storybook-static
-          echo "Checking for symlinks:"
-          find ./storybook-static -type l
-
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static

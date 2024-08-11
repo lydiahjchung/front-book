@@ -32,14 +32,16 @@ jobs:
       - name: Build Storybook
         run: pnpm run build-storybook
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
+          name: github-pages
           path: storybook-static
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [test, build]
+    needs: build
 
     permissions:
       pages: write
@@ -50,6 +52,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ./storybook-static
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

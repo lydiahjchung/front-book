@@ -1,9 +1,14 @@
 name: Setup Node.js and Dependencies
 description: Sets up Node.js, pnpm, and installs dependencies
 
+inputs:
+  working-directory:
+    description: "Directory containing the project files"
+    required: false
+    default: "."
+
 runs:
   using: "composite"
-
   steps:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
@@ -15,10 +20,9 @@ runs:
       with:
         node-version: 22
         cache: "pnpm"
-        cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
 
     - name: Install dependencies
+      shell: bash
       run: |
         cd ${{ inputs.working-directory }}
         pnpm install --frozen-lockfile
-      shell: bash

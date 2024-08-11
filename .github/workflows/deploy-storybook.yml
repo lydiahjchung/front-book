@@ -57,3 +57,13 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: storybook-static
+
+      - name: Output Storybook URL
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const url = process.env.STORYBOOK_URL;
+            core.summary
+              .addHeading('Storybook Deployment')
+              .addLink('View deployed Storybook', url)
+              .write();

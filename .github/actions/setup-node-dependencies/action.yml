@@ -32,6 +32,11 @@ runs:
         cache: "pnpm"
         cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
 
+    - name: Ensure pnpm is available
+      run: |
+        pnpm --version
+      shell: bash
+
     - name: Get pnpm cache directory path
       run: echo "dir=$(pnpm store path)" >> $GITHUB_ENV
       shell: bash

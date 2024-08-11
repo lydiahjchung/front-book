@@ -40,7 +40,6 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-
     needs: build
 
     permissions:
@@ -52,9 +51,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
@@ -64,8 +60,13 @@ jobs:
           name: storybook-build
           path: ./storybook-static
 
+      - name: List contents of the artifact
+        run: |
+          echo "Contents of ./storybook-static:"
+          ls -lR ./storybook-static
+          echo "Total size:"
+          du -sh ./storybook-static
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: storybook-build

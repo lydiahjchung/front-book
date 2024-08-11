@@ -1,0 +1,49 @@
+name: Deploy Storybook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js and Dependencies
+        uses: ./.github/actions/setup-node-dependencies
+
+      - name: Run tests
+        run: pnpm test
+
+  build:
+    runs-on: ubuntu-latest
+
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js and Dependencies
+        uses: ./.github/actions/setup-node-dependencies
+
+      - name: Build Storybook
+        run: pnpm run build-storybook
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy Storybook
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: storybook-static

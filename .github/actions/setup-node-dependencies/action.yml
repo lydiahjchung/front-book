@@ -1,0 +1,53 @@
+name: Setup Node.js and Dependencies
+description: Sets up Node.js, pnpm, and installs dependencies
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Debug working directory
+      run: |
+        echo "Current working directory: $(pwd)"
+        echo "Contents of current directory:"
+        ls -la
+        echo "Contents of directory:"
+        ls -la ${{ inputs.working-directory }}
+      shell: bash
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: latest
+
+    - name: Debug pnpm
+      run: |
+        echo "pnpm version: $(pnpm --version)"
+        echo "pnpm executable location: $(which pnpm)"
+      shell: bash
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: "pnpm"
+        cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
+
+    - name: Get pnpm cache directory path
+      run: echo "dir=$(pnpm store path)" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Cache pnpm dependencies
+      id: pnpm-cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.dir }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-
+
+    - name: Install dependencies
+      run: |
+        echo "Installing dependencies in: ${{ inputs.working-directory }}"
+        cd ${{ inputs.working-directory }}
+        pnpm install --prefer-frozen-lockfile
+      shell: bash

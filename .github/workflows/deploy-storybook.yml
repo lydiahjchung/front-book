@@ -32,6 +32,12 @@ jobs:
       - name: Build Storybook
         run: pnpm run build-storybook
 
+      - name: Upload Storybook build
+        uses: actions/upload-artifact@v3
+        with:
+          name: storybook-build
+          path: storybook-static
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -40,6 +46,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Download Storybook build
+        uses: actions/download-artifact@v3
+        with:
+          name: storybook-build
+          path: storybook-static
 
       - name: Deploy Storybook
         uses: JamesIves/github-pages-deploy-action@v4

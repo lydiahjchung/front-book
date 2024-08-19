@@ -1,5 +1,3 @@
-import React from "react"
-
 export interface TestimonialCardProps {
   name: string
   handle: string
@@ -19,7 +17,7 @@ export const TestimonialCard = ({
     <div className="font-body flex flex-col bg-white w-[340px] p-[24px] gap-[16px] rounded-lg shadow">
       <div className="flex flex-row gap-[16px]">
         <div className="w-[48px] h-[48px] rounded-full overflow-hidden">
-          <img src="profile-thumbnail.png" alt="thumbnail" />
+          <img src="imgs/profile-thumbnail.webp" alt="thumbnail" />
         </div>
         <div className="flex flex-col">
           <span className="text-lg font-semibold text-neutral-900">{name}</span>

@@ -36,6 +36,7 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
+    ariaLabel: "Button CTA",
     variant: "primary",
     text: "Button CTA",
     size: "md",
@@ -75,6 +76,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
+    ariaLabel: "Button CTA",
     variant: "secondary",
     text: "Button CTA",
     size: "md",
@@ -114,6 +116,7 @@ export const Secondary: Story = {
 
 export const Tertiary: Story = {
   args: {
+    ariaLabel: "Button CTA",
     variant: "tertiary",
     text: "Button CTA",
     size: "md",
@@ -153,6 +156,7 @@ export const Tertiary: Story = {
 
 export const LinkColor: Story = {
   args: {
+    ariaLabel: "Button CTA",
     variant: "linkColor",
     text: "Button CTA",
     size: "md",
@@ -177,6 +181,7 @@ export const LinkColor: Story = {
 
 export const LinkGray: Story = {
   args: {
+    ariaLabel: "Button CTA",
     variant: "linkGray",
     text: "Button CTA",
     size: "md",
@@ -201,6 +206,7 @@ export const LinkGray: Story = {
 
 export const Destructive: Story = {
   args: {
+    ariaLabel: "Button CTA",
     variant: "destructive",
     text: "Button CTA",
     size: "md",

@@ -5,19 +5,40 @@ import { Button } from "./Button"
 
 describe("Render Button Component", () => {
   test("Render Primary Button with correct text", () => {
-    render(<Button variant="primary" size="lg" text="Click me" />)
+    render(
+      <Button
+        variant="primary"
+        size="lg"
+        text="Click me"
+        ariaLabel="Click me"
+      />,
+    )
     const button = screen.getByRole("button", { name: /Click me/i })
     expect(button).toBeInTheDocument()
   })
 
   test("Button has correct size classes", () => {
-    render(<Button variant="primary" size="xl" text="Large Button" />)
+    render(
+      <Button
+        variant="primary"
+        size="xl"
+        text="Large Button"
+        ariaLabel="Large Button"
+      />,
+    )
     const button = screen.getByRole("button", { name: /Large Button/i })
     expect(button).toHaveClass("text-base px-5 py-3")
   })
 
   test("Button has correct variant classes", () => {
-    render(<Button variant="secondary" size="md" text="Secondary Button" />)
+    render(
+      <Button
+        variant="secondary"
+        size="md"
+        text="Secondary Button"
+        ariaLabel="Secondary Button"
+      />,
+    )
     const button = screen.getByRole("button", { name: /Secondary Button/i })
     expect(button).toHaveClass(
       "bg-white text-black border-[0.5px] border-solid border-neutral-200",
@@ -25,7 +46,14 @@ describe("Render Button Component", () => {
   })
 
   test("Button changes style on hover", async () => {
-    render(<Button variant="primary" size="md" text="Hover Me" />)
+    render(
+      <Button
+        variant="primary"
+        size="md"
+        text="Hover Me"
+        ariaLabel="Hover Me"
+      />,
+    )
     const button = screen.getByRole("button", { name: /Hover Me/i })
 
     await userEvent.hover(button)
@@ -33,7 +61,14 @@ describe("Render Button Component", () => {
   })
 
   test("Button changes style on focus", async () => {
-    render(<Button variant="primary" size="md" text="Focus Me" />)
+    render(
+      <Button
+        variant="primary"
+        size="md"
+        text="Focus Me"
+        ariaLabel="Focus Me"
+      />,
+    )
     const button = screen.getByRole("button", { name: /Focus Me/i })
 
     await userEvent.tab()
@@ -45,7 +80,13 @@ describe("Render Button Component", () => {
 
   test("Disabled button has correct styles", () => {
     render(
-      <Button variant="primary" size="md" text="Disabled Button" disabled />,
+      <Button
+        variant="primary"
+        size="md"
+        text="Disabled Button"
+        ariaLabel="Disabled Button"
+        disabled
+      />,
     )
     const button = screen.getByRole("button", { name: /Disabled Button/i })
 

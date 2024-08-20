@@ -8,11 +8,7 @@ export const TestimonialCard = ({
   name,
   handle,
   text,
-}: {
-  name: string
-  handle: string
-  text: string
-}) => {
+}: TestimonialCardProps) => {
   return (
     <div className="font-body flex flex-col bg-white w-[340px] p-[24px] gap-[16px] rounded-lg shadow">
       <div className="flex flex-row gap-[16px]">

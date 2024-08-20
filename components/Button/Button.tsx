@@ -1,5 +1,3 @@
-import StarIcon from "@public/icons/StarIcon"
-
 import { cva, VariantProps } from "class-variance-authority"
 import { cn } from "@utils/cn"
 
@@ -114,34 +112,46 @@ const ButtonVariants = cva(
 )
 
 export interface ButtonProps {
-  text: string
+  ariaLabel: string
+  text?: string
   variant: VariantProps<typeof ButtonVariants>["variant"]
   size: VariantProps<typeof ButtonVariants>["size"]
   onClick?: () => void
   disabled?: boolean
+  icon?: React.ReactNode
+  className?: string
 }
 
 export const Button = ({
+  ariaLabel,
   text,
   variant,
   size,
   onClick,
   disabled,
+  icon,
+  className,
 }: ButtonProps) => {
   return (
     <button
-      className={cn(ButtonVariants({ variant, size, hasText: text !== "" }))}
+      aria-label={ariaLabel}
+      className={cn(
+        ButtonVariants({ variant, size, hasText: text !== "" }),
+        className,
+      )}
       onClick={onClick}
       disabled={disabled}
     >
-      {text ? (
+      {icon && text ? (
         <>
-          <StarIcon />
+          {icon}
           {text}
-          <StarIcon />
+          {icon}
         </>
+      ) : icon ? (
+        <>{icon}</>
       ) : (
-        <StarIcon />
+        <>{text}</>
       )}
     </button>
   )

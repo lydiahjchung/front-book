@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { Button } from "./Button"
+import { StarIcon } from "@public/icons/Icon"
 
 const meta = {
   title: "Components/Button",
@@ -38,6 +39,7 @@ export const Primary: Story = {
     variant: "primary",
     text: "Button CTA",
     size: "md",
+    icon: <StarIcon />,
   },
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -76,6 +78,7 @@ export const Secondary: Story = {
     variant: "secondary",
     text: "Button CTA",
     size: "md",
+    icon: <StarIcon />,
   },
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -114,6 +117,7 @@ export const Tertiary: Story = {
     variant: "tertiary",
     text: "Button CTA",
     size: "md",
+    icon: <StarIcon />,
   },
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -152,6 +156,7 @@ export const LinkColor: Story = {
     variant: "linkColor",
     text: "Button CTA",
     size: "md",
+    icon: <StarIcon />,
   },
   render: (args) => (
     <div
@@ -175,6 +180,7 @@ export const LinkGray: Story = {
     variant: "linkGray",
     text: "Button CTA",
     size: "md",
+    icon: <StarIcon />,
   },
   render: (args) => (
     <div
@@ -198,6 +204,7 @@ export const Destructive: Story = {
     variant: "destructive",
     text: "Button CTA",
     size: "md",
+    icon: <StarIcon />,
   },
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
